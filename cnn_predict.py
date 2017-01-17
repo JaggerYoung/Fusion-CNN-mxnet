@@ -87,7 +87,7 @@ class InceptionIter(mx.io.DataIter):
 	        idx = k * self.batch_size + i
 		img = readImg(self.data_1[idx], self.data_shape)
 		data.append(img)
-	        label.append(self.data_2[k])
+	        label.append(self.data_2[idx])
 	
 	    data_all = [mx.nd.array(data)]
 	    label_all = [mx.nd.array(label)]
