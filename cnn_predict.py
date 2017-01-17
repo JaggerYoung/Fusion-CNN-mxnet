@@ -46,7 +46,7 @@ def readData(Filename, num):
 	l_n = len_pic/num
 	for i in range(num):
 	    data_1.append(pic[i*l_n])    
-	data_2.append(int(tmp_2))
+	    data_2.append(int(tmp_2))
     f.close()
     return (data_1, data_2)
 
@@ -149,8 +149,13 @@ if __name__ == '__main__':
 
 #def get_label():
     
-    (tmp_1, train_label) = readData(train_file, NUM_SAMPLES)
-    (tmp_2, test_label) = readData(test_file, NUM_SAMPLES)
+    (tmp_1, train_label_1) = readData(train_file, NUM_SAMPLES)
+    (tmp_2, test_label_1) = readData(test_file, NUM_SAMPLES)
+    train_label = []
+    test_label = []
+    for i in range(len(train_label_1)/3):
+        train_label.append(train_label_1[i*3])
+        test_label.append(test_label_1[i*3])
 
     print mx.nd.array(train_label).shape
     print mx.nd.array(test_label).shape
