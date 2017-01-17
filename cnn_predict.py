@@ -126,13 +126,8 @@ if __name__ == '__main__':
     feature_exactor = mx.model.FeedForward(ctx=devs, symbol=fea_symbol, num_batch_size=1,
                                            arg_params=model.arg_params, aux_params=model.aux_params,
     					   allow_extra_params=True)
-    train_result = feature_exactor.predict(data_train)
-    test_result = feature_exactor.predict(data_val)
-    vgg_train_result = []
-    vgg_test_result = []
-    for i in range(len(train_result)/3):
-	vgg_train_result.append([train_result[3*i]+train_result[3*i+1]+train_result[3*i+2] for i in range(len(train_result[0]))])
-	vgg_test_result.append([test_result[3*i]+test_result[3*i+1]+test_result[3*i+2] for i in range(len(test_result[0]))])
+    vgg_train_result = feature_exactor.predict(data_train)
+    vgg_test_result = feature_exactor.predict(data_val)
 
     print mx.nd.array(vgg_train_result).shape
     print mx.nd.array(vgg_test_result).shape
@@ -149,13 +144,8 @@ if __name__ == '__main__':
 
 #def get_label():
     
-    (tmp_1, train_label_1) = readData(train_file, NUM_SAMPLES)
-    (tmp_2, test_label_1) = readData(test_file, NUM_SAMPLES)
-    train_label = []
-    test_label = []
-    for i in range(len(train_label_1)/3):
-        train_label.append(train_label_1[i*3])
-        test_label.append(test_label_1[i*3])
+    (tmp_1, train_label) = readData(train_file, NUM_SAMPLES)
+    (tmp_2, test_label) = readData(test_file, NUM_SAMPLES)
 
     print mx.nd.array(train_label).shape
     print mx.nd.array(test_label).shape

@@ -72,16 +72,30 @@ if __name__ == '__main__':
     contexts = [mx.context.gpu(0)]
 
     f_1 = file('train_data.data')
-    x_train = p.load(f_1)
-
+    x_train_1 = p.load(f_1)
+    x_train_2 = x_train_1.tolist()
+    x_train = []
+    for i in range(len(x_train_2)/3):
+        x_train.append([x_train_2[i*3][j]+x_train_2[i*3+1][j]+x_train_2[i*3+2][j] for j in range(len(x_train_2[0]))])
 
     f_2 = file('test_data.data')
-    x_test = p.load(f_2)
-
+    x_test_1 = p.load(f_2)
+    x_test_2 = x_test_1.tolist()
+    x_test = []
+    for i in range(len(x_test_2)/3):
+        x_test.append([x_test_2[i*3][j]+x_test_2[i*3+1][j]+x_test_2[i*3+2][j] for j in range(len(x_test_2[0]))])
+    
     f_3 = file('train_label.data')
-    y_train = p.load(f_3)
+    y_train_1 = p.load(f_3)
+    y_train = []
+    for i in range(len(y_train_1)/3):
+        y_train.append(y_train_1[i*3])
+
     f_4 = file('test_label.data')
-    y_test = p.load(f_4)
+    y_test_1 = p.load(f_4)
+    y_test = []
+    for i in range(len(y_test_1)/3):
+        y_test.append(y_test_1[i*3])
      
     #print mx.nd.array(x_train).shape, mx.nd.array(x_test).shape
     #print mx.nd.array(x_test).shape, mx.nd.array(y_test).shape
